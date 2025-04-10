@@ -1,0 +1,7 @@
+tensorflow>=2.0
+numpy
+requests
+beautifulsoup4
+tldextract
+urllib3
+
