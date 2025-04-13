@@ -1,4 +1,5 @@
 tensorflow>=2.0
+whoisapi
 numpy
 requests
 beautifulsoup4

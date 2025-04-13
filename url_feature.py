@@ -6,7 +6,8 @@ from urllib.parse import urlparse
 import tldextract
 from bs4 import BeautifulSoup
 from urllib.parse import urlencode
-import json
+from whoisapi import *
+from datetime import datetime, timezone
 
 
 def tld_in_subdomain(tld, subdomain):
@@ -46,7 +47,7 @@ def page_rank(key, domain):
         return -1
 
 
-def domain_age(domain):
+def domain_age(domain, api_key=None):
     """
     Get the age of the given domain using the payapi.io API
     Parameters:
@@ -54,21 +55,23 @@ def domain_age(domain):
     Returns:
         int: the age of the domain in days. -2 if the domain does not exist, -1 if the API call fails
     """
-
-    url = domain.split("//")[-1].split("/")[0].split("?")[0]
-    show = "https://input.payapi.io/v1/api/fraud/domain/age/" + url
-    r = requests.get(show)
-
-    if r.status_code == 200:
-        data = r.text
-        jsonToPython = json.loads(data)
-        result = jsonToPython["result"]
-        if result == None:
-            return -2
-        else:
-            return result
-    else:
+    if api_key is None:
         return -1
+    
+    client = Client(api_key=api_key)
+    whois = client.data(domain)
+    input_date_str = whois.created_date_raw
+
+    # Convert to datetime object
+    input_date = datetime.strptime(input_date_str, "%Y-%m-%dT%H:%M:%S%z")
+
+    # Get the current UTC time
+    now = datetime.now(timezone.utc)
+
+    # Calculate the difference
+    diff = now - input_date
+
+    return diff.days
 
 
 def google_index(url):
@@ -103,7 +106,7 @@ def google_index(url):
         return 1
 
 
-def extract_features_from_url(url, opr_key=None):
+def extract_features_from_url(url, opr_key=None, whoisapi_key=None):
     """
     Extract the following features from the URL:
 
@@ -192,7 +195,7 @@ def extract_features_from_url(url, opr_key=None):
     phish_hints = 1.0 if "@" in url else 0.0
 
     # Feature 7: domain_age: retrieved via external_features.domain_age
-    d_age = domain_age(domain)
+    d_age = domain_age(url, whoisapi_key)
 
     # Feature 8: ip: check if hostname is an IP address
     try:

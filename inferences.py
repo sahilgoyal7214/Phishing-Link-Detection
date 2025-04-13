@@ -16,7 +16,7 @@ def load_model_dl():
     model = tf.keras.models.load_model("phishing_model_dl")
     return model
 
-def predict(model, url, opr_key=None):
+def predict(model, url, opr_key=None, whoisapi_key=None):
     """
     Predict the output of a given URL
     Parameters:
@@ -26,7 +26,7 @@ def predict(model, url, opr_key=None):
     Returns:
         np.ndarray: a numpy array of the prediction
     """
-    features = extract_features_from_url(url, opr_key)
+    features = extract_features_from_url(url, opr_key, whoisapi_key)
     features = features.reshape(1, -1)
     predictions = model.predict(features)
     return predictions
@@ -41,10 +41,10 @@ if __name__ == "__main__":
     input_url = sys.argv[1]
     # Optionally provide your OPR API key for page_rank computation:
     opr_key = "so0kwk4448ck8ggwsogwo8kswgs08kwc4gk8s844"  # Replace with your key or leave as None
-
+    whoisapi_key = "YOUR_API_KEY"  # Replace with your key or leave as None
     # model_rl = load_model_rl()
     model = load_model_dl()
     # prediction_rl = predict(model_rl, input_url, opr_key)
-    prediction = predict(model, input_url, opr_key)
+    prediction = predict(model, input_url, opr_key, whoisapi_key)
     print("Predicted output:", prediction)
     # print("rl Predicted output:", prediction_rl)
