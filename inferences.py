@@ -7,14 +7,14 @@ from url_feature import (
 
 
 def load_model_rl():
-    print("Loading rl model...")
-    model = tf.keras.models.load_model("dqn_model.h5")
+    print("Loading rl model (full model)...")
+    model = tf.keras.models.load_model("phishing_model_rl")
     return model
-    # return 0
 
-def load_model():
-    print("Loading model...")
-    return tf.keras.models.load_model("best_model.keras")
+def load_model_dl():
+    print("Loading rl model (full model)...")
+    model = tf.keras.models.load_model("phishing_model_dl")
+    return model
 
 def predict(model, url, opr_key=None):
     """
@@ -42,9 +42,9 @@ if __name__ == "__main__":
     # Optionally provide your OPR API key for page_rank computation:
     opr_key = "so0kwk4448ck8ggwsogwo8kswgs08kwc4gk8s844"  # Replace with your key or leave as None
 
-    model_rl = load_model_rl()
-    model = load_model()
-    prediction_rl = predict(model_rl, input_url, opr_key)
+    # model_rl = load_model_rl()
+    model = load_model_dl()
+    # prediction_rl = predict(model_rl, input_url, opr_key)
     prediction = predict(model, input_url, opr_key)
     print("Predicted output:", prediction)
-    print("rl Predicted output:", prediction_rl)
+    # print("rl Predicted output:", prediction_rl)
