@@ -57,11 +57,17 @@ def domain_age(domain, api_key=None):
     """
     if api_key is None:
         return -1
-    
+
     client = Client(api_key=api_key)
     whois = client.data(domain)
-    input_date_str = whois.created_date_raw
 
+    input_date_str = whois.created_date_raw
+    if input_date_str == '':
+        input_date_str = whois.registry_data.created_date_raw
+
+    if input_date_str is None:
+        return -2
+    
     # Convert to datetime object
     input_date = datetime.strptime(input_date_str, "%Y-%m-%dT%H:%M:%S%z")
 

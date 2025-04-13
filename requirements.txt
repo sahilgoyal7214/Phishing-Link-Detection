@@ -1,6 +1,5 @@
-tensorflow>=2.0
-whoisapi
-numpy
+tensorflow==2.10
+whois-api
 requests
 beautifulsoup4
 tldextract
@@ -8,4 +7,4 @@ urllib3
 pandas
 seaborn
 matplotlib
-
+numpy==1.26.4

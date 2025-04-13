@@ -8,6 +8,7 @@ __pycache__/
 *.jpg
 *.jpeg
 test.py
+test.json
 
 # C extensions
 *.so

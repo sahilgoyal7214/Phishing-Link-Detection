@@ -41,7 +41,8 @@ if __name__ == "__main__":
     input_url = sys.argv[1]
     # Optionally provide your OPR API key for page_rank computation:
     opr_key = "so0kwk4448ck8ggwsogwo8kswgs08kwc4gk8s844"  # Replace with your key or leave as None
-    whoisapi_key = "YOUR_API_KEY"  # Replace with your key or leave as None
+    whoisapi_key = "at_NlbHgbJ1DvB5cHC4PJSaRy7pT38z9"  # Replace with your key or leave as None
+
     # model_rl = load_model_rl()
     model = load_model_dl()
     # prediction_rl = predict(model_rl, input_url, opr_key)
