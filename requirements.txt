@@ -4,4 +4,7 @@ requests
 beautifulsoup4
 tldextract
 urllib3
+pandas
+seaborn
+matplotlib
 
