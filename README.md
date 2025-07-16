@@ -5,7 +5,7 @@ This project provides a framework for extracting features from URLs and using tr
 ## Overview
 
 The project is designed to:
-- **Extract URL Features:** The `url_feature.py` file defines functions to extract multiple features from a given URL—such as domain age, page rank (via an API), hyperlink counts, and more. These features serve as inputs for machine learning models citeturn0file1.
+- **Extract URL Features:** The `url_feature.py` file defines functions to extract multiple features from a given URL—such as domain age, page rank (via an API), hyperlink counts, and more. These features serve as inputs for machine learning models .
 - **Make Predictions:** Using the extracted features, the `inferences.py` file loads two different trained models (a standard model and a reinforcement learning-based model) and performs predictions on an input URL citeturn0file0.
 - **Model Training:** `train.ipynb` Notebook for model training, experimentation, and analysis. This notebook includes code for preparing data, training the TensorFlow models, and evaluating their performance. 
 
